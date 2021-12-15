@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Step one') {
+            steps {
+                echo 'Step one executed - clone'
+                git branch: 'main', url: 'https://github.com/Arthy53/jenkinsdemo.git'
+            }
+        }
+        stage('Step two') {
+            steps {
+                echo 'Step 2 executed - build & test'
+                echo 'pwd'
+                sh 'pwd'
+                echo 'ls -ltr'
+                sh 'ls -ltr'
+                input 'enter value'
+            }
+        }
+        stage('Step three') {
+            steps {
+                echo 'Step 3 executed - deploy'
+                sh 'chmod +x build.sh'
+                sh './build.sh'
+            }
+        }
+    }
+}
